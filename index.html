@@ -4,45 +4,72 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Moles Vengance</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/index.js" defer></script>
   </head>
 
   <body>
     <main>
-        <div id="game-board"></div>
+      <section id="game-board" class="game-board">
+        <div id="game-board-top" class="game-board-top"></div>
+        <div id="game-board-bottom" class="game-board-bottom"></div>
+      </section>
 
-        <div id="start-screen">
-          <h1>Moles Vengance</h1>
-          <p>Our time has finally come!</p>
-          <button>Let's begin</button>
-          <div class="instructions">
-            <p>
-              Use the left-right-up-down arrows to select the hole where you want
-              to appear.
-            </p>
-            <p>Press space-bar to appear and press it again to hide.</p>
-            <img src="" alt="" class="keys-img" />
+      <section id="start-screen" class="start-screen">
+        <h1>Moles Vengance</h1>
+        <p>Our time has finally come!</p>
+        <button>Let's begin</button>
+        <div class="instructions">
+          <p>
+            Use the left-right-up-down arrow keys (or WASD keys) of your
+            keyboard to select the hole where you want to appear <br />
+            Press space-bar to appear and press it again to hide.
+          </p>
+          <div class="keys-img-container">
+            <img
+              src="./images/arrow-keys-spacebar.png"
+              alt=""
+              class="keys-img"
+            />
+            <img
+              src="./images/wasd-keys-spacebar.png"
+              alt=""
+              class="keys-img"
+            />
           </div>
         </div>
-    
-        <div id="game-container">
-           <!--  Here will be the player, the holes and the moles -->
-          <div id="stats">
-            <h2>Stats</h2>
-            <p>Time left:</p>
-            <p>Life:</p>
-            <p>Score:</p>
-          </div>
-        </div>
-    
-        <div id="game-over-screen">
-          <div>
-            <img src="" alt="" />
-            <h2>Game Over</h2>
-            <p>Score:</p>
-          </div>
-          <button>Play Again</button>
-        </div>
+      </section>
 
+      <section id="game-container" class="game-container">
+        <!--  Here will be the player, the holes and the moles -->
+        <div id="stats">
+          <h2>Stats</h2>
+          <p>Lives: <span id="lives">0</span></p>
+          <p>Score: <span id="score">0</span></p>
+          <p>Time left: <span id="time-left">00:00</span></p>
+        </div>
+      </section>
+
+      <section id="holes" class="holes">
+          <div class="hole h-1"></div>
+          <div class="hole h-2"></div>
+          <div class="hole h-3"></div>
+          <div class="hole h-4"></div>
+          <div class="hole h-5"></div>
+          <div class="hole h-6"></div>
+          <div class="hole h-7"></div>
+          <div class="hole h-8"></div>
+          <div class="hole h-9"></div>
+      </section>
+
+      <section id="game-over-screen" class="game-over-screen">
+        <div>
+          <img src="" alt="" />
+          <h2>Game Over</h2>
+          <p>Score: <span id="score">0</span></p>
+        </div>
+        <button>Play Again</button>
+      </section>
     </main>
   </body>
 </html>

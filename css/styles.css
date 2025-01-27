@@ -2,3 +2,189 @@ body {
   padding: 0;
   margin: 0;
 }
+
+main {
+  width: 1200px;
+  height: 600px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.game-board {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-board-top {
+  width: 70%;
+  height: 75%;
+  background-color: lightgrey;
+  margin: 0 auto;
+  border: 1px solid black;
+  transform-style: preserve-3d;
+  transform: perspective(850px) rotateX(30deg) rotateY(0deg) rotateZ(0deg);
+}
+
+.game-board-bottom {
+  width: 81%;
+  height: 5%;
+  background-color: lightgrey;
+  margin: 0;
+  border: 1px solid black;
+}
+
+/* START SCREEN */
+.start-screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 30%;
+  height: 50%;
+}
+
+.start-screen h1 {
+  margin: 0;
+  text-align: center;
+}
+
+.start-screen p {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.start-screen button {
+  margin: 30px 0;
+  padding: 8px 25px;
+  border: 0.4px solid black;
+  border-radius: 4px;
+}
+
+.start-screen button:hover {
+  cursor: pointer;
+}
+
+.start-screen .instructions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.keys-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.keys-img {
+  width: 200px;
+  margin: 0 40px;
+}
+
+/* GAME CONTAINER */
+.game-container {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+
+/* GAME HOLES */
+.holes {
+  display: block;
+}
+
+.hole {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: black;
+  margin: 5px;
+  position: absolute;
+  transform-style: preserve-3d;
+  transform: perspective(850px) rotateX(30deg) rotateY(0deg) rotateZ(0deg);
+}
+
+.h-1 {
+  top: 140px;
+  left: 250px;
+}
+
+.h-2 {
+  top: 140px;
+  left: 450px;
+}
+
+.h-3 {
+  top: 140px;
+  left: 650px;
+}
+
+.h-4 {
+  top: 280px;
+  left: 230px;
+}
+
+.h-5 {
+  top: 280px;
+  left: 450px;
+}
+
+.h-6 {
+  top: 280px;
+  left: 670px;
+}
+
+.h-7 {
+  top: 420px;
+  left: 210px;
+}
+
+.h-8 {
+  top: 420px;
+  left: 450px;
+}
+
+.h-9 {
+  top: 420px;
+  left: 690px;
+}
+
+/* GAME OVER SCREEN */
+.game-over-screen {
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  z-index: 100;
+}
+
+.game-over-screen p {
+  text-align: center;
+}
+
+.game-over-screen button {
+  margin: 30px 0;
+  padding: 8px 25px;
+  border: 0.4px solid black;
+  border-radius: 4px;
+}
