@@ -5,8 +5,8 @@ class Game {
     this.gameOverScreen = document.getElementById("game-over-screen");
     this.gameStats = document.getElementById("game-stats");
     this.gameHoles = document.getElementById("holes");
-    this.player = new Player();
-    this.moles = [];
+    this.player;
+    this.moles = [new Mole, new Mole, new Mole];
     this.gameDuration = 60;
     this.remainingTime = this.gameDuration;
     this.timeRemainingContainer = document.getElementById("time-left");
@@ -36,33 +36,34 @@ class Game {
     this.timer = setInterval(() => {
       this.remainingTime -= 1;
 
-      const minutes = Math.floor(this.remainingTime / 30)
+      const minutes = Math.floor(this.remainingTime / 60)
         .toString()
         .padStart(2, "0");
-      const seconds = (this.remainingTime % 30).toString().padStart(2, "0");
+      const seconds = (this.remainingTime % 60).toString().padStart(2, "0");
 
       this.timeRemainingContainer.innerText = `${minutes}:${seconds}`;
 
       if (this.remainingTime === 0) {
+        console.log("Time's up!");
         clearInterval(this.timer);
       }
     }, 1000);
   }
 
   gameLoop() {
-    //Move the moles randomly
+    //Move the moles
     this.moles.forEach((mole) => mole.move());
 
-    //Update the player's position
-    this.player.update();
+/*     //Update the player's position
+    this.player.update(); */
 
     //Check if the game is over
-    if (this.gameOver) {
+    if (this.gameOver = true) {
       clearInterval(this.timer);
     }
   }
 
-  update() {
+/*   update() {
     //Checks the player's position when moves
     this.player.move();
 
@@ -87,9 +88,9 @@ class Game {
     if (this.player.lives === 0) {
       this.endGame();
     }
-  }
+  } */
 
-  endGame() {
+/*   endGame() {
     this.gameOver = true;
 
     //Show the game over screen
@@ -108,5 +109,5 @@ class Game {
     } else if(this.finalScore <= 600) {
         return "You are the master of the mallet... and the mole's holes";
     }
-  }
+  } */
 }
