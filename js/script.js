@@ -1,3 +1,4 @@
+
 window.onload = function () {
     /*Bring all elements that will be used*/
     const beginButton = document.getElementById("begin-button");
@@ -22,11 +23,9 @@ window.onload = function () {
         startGame();
     });
 
-    /*The function that starts the game, has to hide the start screen and show the game,
-    create a new game (reassing the game variable) and start the game created*/
+    /*The function that starts the game, has to show the game, create a new game (reassing 
+    the game variable), show the game and start the game created*/
     function startGame() {
-        startScreen.styles.display = "none";
-
         game = new Game();
         game.start();
     }
