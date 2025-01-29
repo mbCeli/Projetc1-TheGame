@@ -25,9 +25,10 @@ window.onload = function () {
     game.start();
   }
 
-  /*The again button, restarts the game and starts a new game*/
+  /*The again button, restarts the game, starts a new game and hides the game over screen*/
   againButton.addEventListener("click", function () {
     console.log("Play Again Button Clicked");
+    game.gameOverScreen.style.display = "none";
     game = new Game();
     game.start();
   });

@@ -28,3 +28,6 @@ O
 - The hole in which the player appear is ramdonly selected and the
 user only has to press the space bar to make the place hide and
 a new hole will be selected.
+
+
+png hole: <a href='https://pngtree.com/freepng/huge-cracks-in-the-ground_5725808.html'>png image from pngtree.com/</a>
