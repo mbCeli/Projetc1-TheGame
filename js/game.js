@@ -34,6 +34,7 @@ class Game {
 
   startCountdown() {
     this.timer = setInterval(() => {
+      console.log("timer started")
       this.remainingTime -= 1;
 
       const minutes = Math.floor(this.remainingTime / 60)
@@ -46,6 +47,7 @@ class Game {
       if (this.remainingTime === 0) {
         console.log("Time's up!");
         clearInterval(this.timer);
+        this.endGame();
       }
     }, 1000);
   }
@@ -90,7 +92,7 @@ class Game {
     }
   } */
 
-/*   endGame() {
+  endGame() {
     this.gameOver = true;
 
     //Show the game over screen
@@ -109,5 +111,5 @@ class Game {
     } else if(this.finalScore <= 600) {
         return "You are the master of the mallet... and the mole's holes";
     }
-  } */
+  }
 }
