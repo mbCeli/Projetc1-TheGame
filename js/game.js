@@ -33,6 +33,7 @@ class Game {
   }
 
   startCountdown() {
+    console.log("Countdown started");
     this.timer = setInterval(() => {
       console.log("timer started")
       this.remainingTime -= 1;

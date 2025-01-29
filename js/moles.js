@@ -7,9 +7,9 @@ class Mole {
     this.mole.style.position = "absolute";
     this.mole.style.width = "100px";
     this.mole.style.height = "100px";
-    //position the moles at the top of the board to start and can only move inside the limits of the board
-    this.mole.style.top = Math.floor(Math.random() * 600) + "px";
-    this.mole.style.left = Math.floor(Math.random() * 950) + "px";
+    //to start the moles at a random position on the board
+    this.mole.style.top = Math.floor(Math.random() * (600 - 100)) + "px";
+    this.mole.style.left = Math.floor(Math.random() * (950 - 100)) + "px";
     //add the mole class so I can see the transition in css
     this.mole.classList.add("mole");
     //add the mole to the board
@@ -17,12 +17,12 @@ class Mole {
     //direction of the moles
     this.directionX = 0;
     this.directionY = 0;
-    //to start the moles at a random position
-    this.top = Math.floor(Math.random() * 600 - 100);
-    this.left = Math.floor(Math.random() * 950 - 100);
+    //to keep the position of the moles inside the limits of the board
+    this.top = Math.floor(Math.random() * (600 - 100));
+    this.left = Math.floor(Math.random() * (950 - 100));
     //timer for the movement of the moles
-    this.gameDuration = 60;
-    this.remainingTime = this.gameDuration;
+    this.movementDuration = 60;
+    this.remainingTime = this.movementDuration;
     this.timer = null;
     this.move();
   }
@@ -30,7 +30,7 @@ class Mole {
   //function that moves the moles randomly around the board automatically
   move() {
     // Create an interval for the moles to move
-    this.timer = setInterval(() => {
+    this.movementTimer = setInterval(() => {
       // Randomly change the mole's direction every 1 second
       this.remainingTime -= 1;
 
@@ -62,33 +62,13 @@ class Mole {
       if (this.top < 0) this.top = 0; // prevent going up beyond 0
       if (this.top > 600 - 100) this.top = 600 - 100; // prevent going down beyond board height (100px for mole size)
 
-      /* // Check for nearby holes and avoid them
-      const holes = document.querySelectorAll(".hole");
-      holes.forEach((hole) => {
-        const holeRect = hole.getBoundingClientRect();
-        const moleRect = this.mole.getBoundingClientRect();
-
-        // If the mole is near a hole, change its direction to avoid it
-        if (
-          Math.abs(moleRect.left - holeRect.left) < 50 &&
-          Math.abs(moleRect.top - holeRect.top) < 50
-        ) {
-          // If the mole is too close to the hole, change direction
-          if (randomDirection === 0 || randomDirection === 1) {
-            this.directionX = randomDirection === 0 ? -10 : 10; // Move left or right
-          } else {
-            this.directionY = randomDirection === 2 ? -10 : 10; // Move up or down
-          }
-        }
-      }); */
-
       // Update the position of the mole on the board
       this.mole.style.left = `${this.left}px`;
       this.mole.style.top = `${this.top}px`;
 
       // Stop the mole's movement when the game is over
       if (this.remainingTime === 0) {
-        clearInterval(this.timer);
+        clearInterval(this.movementTimer);
       }
     }, 1000); // Change position every 1 second
   }
