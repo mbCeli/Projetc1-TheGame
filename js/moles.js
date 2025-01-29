@@ -21,9 +21,9 @@ class Mole {
     this.top = Math.floor(Math.random() * (600 - 100));
     this.left = Math.floor(Math.random() * (950 - 100));
     //timer for the movement of the moles
-    this.movementDuration = 60;
+    this.movementDuration = 10;
     this.remainingTime = this.movementDuration;
-    this.timer = null;
+    this.movementTimer = null;
     this.move();
   }
 
@@ -31,6 +31,7 @@ class Mole {
   move() {
     // Create an interval for the moles to move
     this.movementTimer = setInterval(() => {
+      
       // Randomly change the mole's direction every 1 second
       this.remainingTime -= 1;
 
@@ -68,7 +69,8 @@ class Mole {
 
       // Stop the mole's movement when the game is over
       if (this.remainingTime === 0) {
-        clearInterval(this.movementTimer);
+        clearInterval(this.movementTimer)
+    
       }
     }, 1000); // Change position every 1 second
   }

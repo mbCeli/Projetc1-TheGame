@@ -153,15 +153,14 @@ main {
 /* GAME OVER SCREEN */
 .game-over-screen {
   display: none;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 25%;
-  left: 25%;
-  width: 50%;
+  top: 150px;
+  left: 300px;
+  width: 30%;
   height: 50%;
-  z-index: 100;
 }
 
 .game-over-screen p {

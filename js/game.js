@@ -3,18 +3,21 @@ class Game {
     this.board = document.getElementById("game-board");
     this.startScreen = document.getElementById("start-screen");
     this.gameOverScreen = document.getElementById("game-over-screen");
+    this.gameOverStats = document.getElementById("game-over-stats");
     this.gameStats = document.getElementById("game-stats");
     this.gameHoles = document.getElementById("holes");
     this.player;
-    this.moles = [new Mole, new Mole, new Mole];
-    this.gameDuration = 60;
+    this.moles = [new Mole];
+    this.gameDuration = 10;
     this.remainingTime = this.gameDuration;
     this.timeRemainingContainer = document.getElementById("time-left");
     this.timer = null;
     this.gameOver = false;
     this.lives = 3;
-    this.score = 0;
+    this.score = 500;
     this.finalScore = document.getElementById("final-score");
+    this.finalMessage = document.createElement("p");
+    this.gameOverStats.appendChild(this.finalMessage);
   }
 
   start() {
@@ -61,8 +64,9 @@ class Game {
     this.player.update(); */
 
     //Check if the game is over
-    if (this.gameOver = true) {
+    if (this.gameOver === true) {
       clearInterval(this.timer);
+      this.endGame();
     }
   }
 
@@ -103,14 +107,17 @@ class Game {
     this.gameStats.style.display = "none";
     this.gameHoles.style.display = "none";
 
+
     //Show the final score
     this.finalScore.innerText = this.score;
-    if(this.finalScore <= 200) {
-        return "Our revenge has been fulfilled";
-    } else if(this.finalScore <= 400 && this.finalScore > 200) {
-        return "You are good but not good for us";
-    } else if(this.finalScore <= 600) {
-        return "You are the master of the mallet... and the mole's holes";
+
+    if(this.score <= 200)  {
+      //show a message based on the final score below the score
+        this.finalMessage.innerText = "Our revenge has been fulfilled";
+    } else if(this.score <= 400 && this.finalScore > 200) {
+        this.finalMessage.textContent = "You are good but not good for us";
+    } else if(this.score <= 600 && this.finalScore > 400) {
+        this.finalMessage.textContent = "You are the master of the mallet... and the mole's holes";
     }
   }
 }
