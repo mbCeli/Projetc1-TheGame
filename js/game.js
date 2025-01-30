@@ -10,8 +10,13 @@ class Game {
     for (let i = 0; i < 9; i++) {
       this.holes.push(new Hole(i)); // Pass the index to the Hole constructor
     }
-   /*  this.player = new Player; */
-    this.moles = [new Mole, new Mole, new Mole, new Mole];
+
+    this.player = new Player();
+    this.moles = [
+      new Mole, 
+      new Mole, 
+      new Mole, 
+      new Mole];
     this.gameDuration = 30;
     this.remainingTime = this.gameDuration;
     this.timeRemainingContainer = document.getElementById("time-left");
@@ -31,7 +36,7 @@ class Game {
     //Show the game display where the player will play
     this.gameStats.style.display = "flex";
 
-    //Start the timer countdown
+     //Start the timer countdown
     this.startCountdown();
 
     //Start the game loop
@@ -52,7 +57,7 @@ class Game {
       this.timeRemainingContainer.innerText = `${minutes}:${seconds}`;
 
       if (this.remainingTime === 0) {
-        console.log("Time's up!");
+        console.log("Time's up!"); // Debugging log
         clearInterval(this.timer);
         this.endGame();
       }
@@ -60,29 +65,34 @@ class Game {
   }
 
   gameLoop() {
+    if (this.gameOver === true) {
+      console.log("Game over"); // Debugging log
+      return;
+    }
+
     //Place the holes
     this.holes.forEach((hole) => hole.show());
 
     //Move the moles
     this.moles.forEach((mole) => mole.move());
 
-    //Check if the game is over
-    if (this.gameOver === true) {
-      clearInterval(this.timer);
-      this.endGame();
-    }
+    //Move the player
+    this.player.move();
   }
 
   endGame() {
     this.gameOver = true;
 
+    // Stop the movement of the moles
     this.moles.forEach((mole) => mole.stopMoving());
-
     // Hide all moles from the game board
     this.moles.forEach((mole) => mole.hide());
 
     // Hide all holes from the game board
     this.holes.forEach((hole) => hole.hide());
+
+    // Hide the player from the game board
+    this.player.hide();
 
     // Show the game over screen
     this.gameOverScreen.style.display = "flex";

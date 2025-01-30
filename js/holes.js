@@ -5,7 +5,7 @@ class Hole {
     this.hole = document.createElement("img");
     this.hole.src = "./images/hole-pngtree.png";
     this.hole.style.position = "absolute";
-    this.hole.style.width = "130px";
+    this.hole.style.width = "150px";
     this.hole.style.height = "130px";
     this.holesContainer.appendChild(this.hole);
 
@@ -36,5 +36,6 @@ class Hole {
   hide() {
     this.hole.style.display = "none";
   }
+  
 }
 

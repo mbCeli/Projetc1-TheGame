@@ -29,6 +29,7 @@ class Mole {
   stopMoving() {
     clearInterval(this.movementTimer); // Clear the movement interval
   }
+  
   move() {
     // Create an interval for the moles to move
     this.movementTimer = setInterval(() => {

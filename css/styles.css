@@ -95,6 +95,12 @@ main {
   margin-left: 300px;
 }
 
+.highlighted-hole {
+  border: 2px solid rgb(226, 193, 101);
+  border-radius: 30%;
+  box-shadow: 0 0 10px rgba(255, 230, 0, 0.5);;
+}
+
 /* MOLES MOVEMENT */
 .mole {
   transition: left 4s ease-in-out, top 1s ease-in-out; /* Smooth transition for left and top properties */
