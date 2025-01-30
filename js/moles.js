@@ -1,8 +1,9 @@
 class Mole {
-  constructor(holes, player) {
+  constructor(holes, player, game) {
     this.board = document.getElementById("game-board");
     this.holes = holes; // Save the holes for collision checking
     this.player = player;
+    this.game = game;
     //the mole
     this.mole = document.createElement("img");
     this.mole.src = "./images/CustomEdited-Mole.png";
@@ -25,6 +26,7 @@ class Mole {
     this.left = Math.floor(Math.random() * (950 - 100));
     // timer for the movement of the moles
     this.movementTimer = null;
+    this.collisionDetected = false;
     this.move();
   }
 
@@ -83,29 +85,53 @@ class Mole {
   }
 
   checkMolePlayerCollision() {
-    // Assuming this.mole (current mole) has the correct properties for position
-    const moleLeft = this.left;
-    const moleTop = this.top;
-    const moleRight = moleLeft + this.mole.width; // Right edge of the mole
-    const moleBottom = moleTop + this.mole.height; // Bottom edge of the mole
+    if (this.collisionDetected) return;
 
-    // Assuming player has the correct properties for position
-    const playerLeft = this.player.left;
-    const playerTop = this.player.top;
-    const playerRight = playerLeft + this.player.playerElement.width; // Right edge of the player
-    const playerBottom = playerTop + this.player.playerElement.height; // Bottom edge of the player
+    const moleRect = this.mole.getBoundingClientRect();
+    const moleLeft = moleRect.left;
+    const moleTop = moleRect.top;
+    const moleRight = moleLeft + moleRect.width;
+    const moleBottom = moleTop + moleRect.height;
 
-    // Check if the mole and player overlap
+    const playerRect = this.player.playerElement.getBoundingClientRect();
+    const playerLeft = playerRect.left;
+    const playerTop = playerRect.top;
+    const playerRight = playerLeft + playerRect.width;
+    const playerBottom = playerTop + playerRect.height;
+
     if (
       moleLeft < playerRight &&
       moleRight > playerLeft &&
       moleTop < playerBottom &&
       moleBottom > playerTop
     ) {
-      // Subtract points for collision
-      game.score -= 20;
-      game.updateScoreDisplay();
-      console.log("Mole hit the player!");
+      console.log("Collision detected");
+
+      // Mark the collision as detected
+      this.collisionDetected = true;
+
+      // Subtract points from the game object
+      if (this.game.score >= 20) {
+        this.game.score -= 20;
+      } else {
+        this.game.score = 0;
+      }
+
+      this.game.updateScore();
+      console.log("Score updated");
+
+      // Prevent mole from going over player
+      if (this.directionX > 0) {
+        this.left -= 50;
+      } else if (this.directionX < 0) {
+        this.left += 50;
+      } else if (this.directionY > 0) {
+        this.top -= 50;
+      } else if (this.directionY < 0) {
+        this.top += 50;
+      }
+
+      this.updateMolePosition();
     }
   }
 

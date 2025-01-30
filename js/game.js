@@ -13,10 +13,10 @@ class Game {
 
     this.player = new Player();
     this.moles = [
-      new Mole(this.holes, this.player),
-      new Mole(this.holes, this.player),
-      new Mole(this.holes, this.player),
-      new Mole(this.holes, this.player),
+      new Mole(this.holes, this.player, this),
+      new Mole(this.holes, this.player, this),
+      new Mole(this.holes, this.player, this),
+      new Mole(this.holes, this.player, this),
     ];
     this.gameDuration = 30;
     this.remainingTime = this.gameDuration;
@@ -42,7 +42,7 @@ class Game {
     // Reset the score when starting a new game
     this.score = 0;
     this.scoreDisplay.innerText = this.score; // Update the score display
-    
+
     //Start the timer countdown
     this.startCountdown();
 
@@ -101,7 +101,7 @@ class Game {
           this.score += 10;
           this.scoreDisplay.innerText = this.score;
         }
-      }, 1000); // Add 10 points every second
+      }, 2000); // Add 10 points every second
     }
   }
 
