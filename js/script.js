@@ -13,14 +13,12 @@ window.onload = function () {
   /*Add event listener to the begin button so when it is clicked, the startGame function 
     is called*/
   beginButton.addEventListener("click", function () {
-    console.log("Begin Button Clicked");
     startGame();
   });
 
   /*The function that starts the game, has to show the game, create a new game (reassing 
     the game variable), show the game and start the game created*/
   function startGame() {
-    console.log("Game Started");
     game = new Game();
     game.start();
 
@@ -65,7 +63,6 @@ window.onload = function () {
 
   /*The again button, restarts the game, starts a new game and hides the game over screen*/
   againButton.addEventListener("click", function () {
-    console.log("Play Again Button Clicked");
     game.gameOverScreen.style.display = "none";
     game = new Game();
     game.start();

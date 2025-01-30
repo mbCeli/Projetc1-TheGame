@@ -98,9 +98,7 @@ class Player {
   // Hide the player back into the hole
   hide() {
     if (this.isVisible === false) return; // if the player is not visible, do nothing
-
-    console.log("Hiding player");
-
+    
     this.isVisible = false;
     this.playerElement.style.display = "none";
   }

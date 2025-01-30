@@ -57,9 +57,7 @@ class Game {
   }
 
   startCountdown() {
-    console.log("Countdown started");
     this.timer = setInterval(() => {
-      console.log("timer started");
       this.remainingTime -= 1;
 
       const minutes = Math.floor(this.remainingTime / 60)
@@ -70,7 +68,6 @@ class Game {
       this.timeRemainingContainer.innerText = `${minutes}:${seconds}`;
 
       if (this.remainingTime === 0) {
-        console.log("Time's up!"); // Debugging log
         clearInterval(this.timer);
         this.endGame();
       }
@@ -79,7 +76,6 @@ class Game {
 
   gameLoop() {
     if (this.gameOver === true) {
-      console.log("Game over"); // Debugging log
       return;
     }
 
@@ -160,16 +156,17 @@ class Game {
 
     // Show a message based on the final score below the score
     if (this.score <= 200) {
-      this.finalMessage.innerText = "Our revenge has been fulfilled";
-      this.finalMessage.style.color = "red";
+      this.finalMessage.innerText = "Our revenge has been fulfilled!";
+      this.finalMessage.style.color = "firebrick";
     } else if (this.score <= 400) {
       this.finalMessage.innerText = "You are good but not good for us";
-      this.finalMessage.style.color = "saddlebrown";
+      this.finalMessage.style.color = "firebrick";
     } else if (this.score <= 600) {
-      this.finalMessage.innerText =
-        "You are the master of the mallet... and the mole's holes";
+      this.finalMessage.innerText = "You are the master of the mallet... and the mole's holes";
+      this.finalMessage.style.color = "firebrick";
     } else {
       this.finalMessage.innerText = "Your score is exceptionally high!";
+      this.finalMessage.style.color = "firebrick";
     }
   }
 }

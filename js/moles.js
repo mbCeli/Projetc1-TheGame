@@ -76,8 +76,6 @@ class Mole {
 
       this.updateMolePosition(); // Update mole position on the screen
 
-      console.log(`Mole moved to (${this.left}, ${this.top})`);
-
       // Check for collision with the player
       this.checkMolePlayerCollision();
     }, 1000);
@@ -96,7 +94,6 @@ class Mole {
       moleRect.top < playerRect.bottom &&
       moleRect.bottom > playerRect.top
     ) {
-      console.log("Collision detected");
       return true;
     }
     

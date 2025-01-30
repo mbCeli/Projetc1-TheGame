@@ -11,7 +11,6 @@ class Hole {
     // Calculate the row and column based on index (0-8)
     this.row = Math.floor(index / 3); // 0, 1, 2 for rows
     this.col = index % 3; // 0, 1, 2 for columns
-    console.log(`Hole ${index}: row = ${this.row}, col = ${this.col}`); // Debug log to check row/col values
   }
 
   show() {
@@ -22,8 +21,6 @@ class Hole {
     // Set the position based on row and column index
     const topPosition = this.row * gapY + 40; // Adding 50 to center the hole vertically
     const leftPosition = this.col * gapX + 100; // Adding 100 to center the hole horizontally
-
-    console.log(`Hole position: top = ${topPosition}, left = ${leftPosition}`); // Debug log to check position
 
     this.hole.style.top = `${topPosition}px`;
     this.hole.style.left = `${leftPosition}px`;
