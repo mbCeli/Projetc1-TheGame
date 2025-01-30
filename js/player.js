@@ -73,6 +73,10 @@ class Player {
       holeCenterY - this.playerElement.height / 2
     }px`;
 
+    // Update the player's position properties for collision detection
+    this.left = holeCenterX - this.playerElement.width / 2;
+    this.top = holeCenterY - this.playerElement.height / 2;
+
     // Highlight the current hole
     const currentHole = this.holesContainer.children[this.currentHoleIndex];
     currentHole.classList.add("highlighted-hole");

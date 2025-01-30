@@ -13,10 +13,11 @@ class Game {
 
     this.player = new Player();
     this.moles = [
-      new Mole, 
-      new Mole, 
-      new Mole, 
-      new Mole];
+      new Mole(this.holes, this.player),
+      new Mole(this.holes, this.player),
+      new Mole(this.holes, this.player),
+      new Mole(this.holes, this.player),
+    ];
     this.gameDuration = 30;
     this.remainingTime = this.gameDuration;
     this.timeRemainingContainer = document.getElementById("time-left");
@@ -24,6 +25,8 @@ class Game {
     this.gameOver = false;
     this.lives = 3;
     this.score = 0;
+    this.scoreDisplay = document.getElementById("score");
+    this.playerVisibleTimer = null;
     this.finalScore = document.getElementById("final-score");
     this.finalMessage = document.createElement("p");
     this.gameOverStats.appendChild(this.finalMessage);
@@ -36,7 +39,11 @@ class Game {
     //Show the game display where the player will play
     this.gameStats.style.display = "flex";
 
-     //Start the timer countdown
+    // Reset the score when starting a new game
+    this.score = 0;
+    this.scoreDisplay.innerText = this.score; // Update the score display
+    
+    //Start the timer countdown
     this.startCountdown();
 
     //Start the game loop
@@ -75,9 +82,27 @@ class Game {
 
     //Move the moles
     this.moles.forEach((mole) => mole.move());
+     this.moles.forEach((mole) => mole.checkMolePlayerCollision());
 
     //Move the player
     this.player.move();
+
+    // Update the score every second if the player is visible
+    if (this.player.isVisible) {
+      this.updateScore();
+    }
+  }
+
+  updateScore() {
+    // Increment points by 10 every second if the player is visible
+    if (this.playerVisibleTimer === null) {
+      this.playerVisibleTimer = setInterval(() => {
+        if (this.player.isVisible) {
+          this.score += 10;
+          this.scoreDisplay.innerText = this.score;
+        }
+      }, 1000); // Add 10 points every second
+    }
   }
 
   endGame() {

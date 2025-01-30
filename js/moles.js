@@ -1,12 +1,15 @@
 class Mole {
-  constructor() {
+  constructor(holes, player) {
     this.board = document.getElementById("game-board");
+    this.holes = holes; // Save the holes for collision checking
+    this.player = player;
     //the mole
     this.mole = document.createElement("img");
     this.mole.src = "./images/CustomEdited-Mole.png";
     this.mole.style.position = "absolute";
     this.mole.style.width = "100px";
     this.mole.style.height = "100px";
+    this.mole.style.zIndex = 10;
     // to start the moles at a random position on the board
     this.mole.style.top = Math.floor(Math.random() * (600 - 100)) + "px";
     this.mole.style.left = Math.floor(Math.random() * (950 - 100)) + "px";
@@ -29,7 +32,12 @@ class Mole {
   stopMoving() {
     clearInterval(this.movementTimer); // Clear the movement interval
   }
-  
+
+  updateMolePosition() {
+    this.mole.style.left = `${this.left}px`;
+    this.mole.style.top = `${this.top}px`;
+  }
+
   move() {
     // Create an interval for the moles to move
     this.movementTimer = setInterval(() => {
@@ -65,14 +73,42 @@ class Mole {
       this.left = newLeft;
       this.top = newTop;
 
-      // Update the position of the mole on the board
-      this.mole.style.left = `${this.left}px`;
-      this.mole.style.top = `${this.top}px`;
-      console.log(
-        `Mole moving from (${this.left}, ${this.top}) to (${newLeft}, ${newTop})`
-      );
+      this.updateMolePosition(); // Update mole position on the screen
+
+      console.log(`Mole moved to (${this.left}, ${this.top})`);
+
+      // Check for collision with the player
+      this.checkMolePlayerCollision();
     }, 800);
   }
+
+  checkMolePlayerCollision() {
+    // Assuming this.mole (current mole) has the correct properties for position
+    const moleLeft = this.left;
+    const moleTop = this.top;
+    const moleRight = moleLeft + this.mole.width; // Right edge of the mole
+    const moleBottom = moleTop + this.mole.height; // Bottom edge of the mole
+
+    // Assuming player has the correct properties for position
+    const playerLeft = this.player.left;
+    const playerTop = this.player.top;
+    const playerRight = playerLeft + this.player.playerElement.width; // Right edge of the player
+    const playerBottom = playerTop + this.player.playerElement.height; // Bottom edge of the player
+
+    // Check if the mole and player overlap
+    if (
+      moleLeft < playerRight &&
+      moleRight > playerLeft &&
+      moleTop < playerBottom &&
+      moleBottom > playerTop
+    ) {
+      // Subtract points for collision
+      game.score -= 20;
+      game.updateScoreDisplay();
+      console.log("Mole hit the player!");
+    }
+  }
+
   // Hide the mole
   hide() {
     this.mole.style.display = "none";
