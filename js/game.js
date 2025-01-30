@@ -17,6 +17,11 @@ class Game {
       new Mole(this.holes, this.player, this),
       new Mole(this.holes, this.player, this),
       new Mole(this.holes, this.player, this),
+      new Mole(this.holes, this.player, this),
+      new Mole(this.holes, this.player, this),
+      new Mole(this.holes, this.player, this),
+      new Mole(this.holes, this.player, this),
+      new Mole(this.holes, this.player, this),
     ];
     this.gameDuration = 30;
     this.remainingTime = this.gameDuration;
@@ -26,6 +31,7 @@ class Game {
     this.lives = 3;
     this.score = 0;
     this.scoreDisplay = document.getElementById("score");
+    this.livesDisplay = document.getElementById("lives");
     this.playerVisibleTimer = null;
     this.finalScore = document.getElementById("final-score");
     this.finalMessage = document.createElement("p");
@@ -82,7 +88,18 @@ class Game {
 
     //Move the moles
     this.moles.forEach((mole) => mole.move());
-     this.moles.forEach((mole) => mole.checkMolePlayerCollision());
+    this.moles.forEach((mole) => {
+      if (mole.checkMolePlayerCollision()) {
+        this.lives -= 1;
+        this.score -= 20;
+        this.livesDisplay.innerText = this.lives;
+        this.scoreDisplay.innerText = this.score;
+      }
+
+      if (this.lives === 0) {
+        this.endGame();
+      }
+    });
 
     //Move the player
     this.player.move();
@@ -90,6 +107,18 @@ class Game {
     // Update the score every second if the player is visible
     if (this.player.isVisible) {
       this.updateScore();
+    }
+  }
+
+  updateHeartIcons() {
+    const heartIconsContainer = document.getElementById("heart-icons");
+    heartIconsContainer.innerHTML = ""; // Clear existing icons
+
+    for (let i = 0; i < this.lives; i++) {
+      const heartIcon = document.createElement("i");
+      heartIcon.className = "fas fa-heart"; // Font Awesome classes for heart icon
+
+      heartIconsContainer.appendChild(heartIcon);
     }
   }
 
@@ -101,8 +130,9 @@ class Game {
           this.score += 10;
           this.scoreDisplay.innerText = this.score;
         }
-      }, 2000); // Add 10 points every second
+      }, 900); // Add 10 points every second
     }
+    this.updateHeartIcons(); // Update heart icons when the player loses lives
   }
 
   endGame() {
@@ -130,13 +160,16 @@ class Game {
 
     // Show a message based on the final score below the score
     if (this.score <= 200) {
-      console.log("the if works");
       this.finalMessage.innerText = "Our revenge has been fulfilled";
-    } else if (this.score <= 400 && this.finalScore > 200) {
-      this.finalMessage.textContent = "You are good but not good for us";
-    } else if (this.score <= 600 && this.finalScore > 400) {
-      this.finalMessage.textContent =
+      this.finalMessage.style.color = "red";
+    } else if (this.score <= 400) {
+      this.finalMessage.innerText = "You are good but not good for us";
+      this.finalMessage.style.color = "saddlebrown";
+    } else if (this.score <= 600) {
+      this.finalMessage.innerText =
         "You are the master of the mallet... and the mole's holes";
+    } else {
+      this.finalMessage.innerText = "Your score is exceptionally high!";
     }
   }
 }

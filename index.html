@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Moles Vengance</title>
     <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="./js/script.js" defer></script>
     <script src="./js/game.js" defer></script>
     <script src="./js/moles.js" defer></script>
@@ -15,12 +16,13 @@
   <body>
     <main>
       <section>
+        <div id="image-overlay"></div>
         <div id="game-board" class="game-board"></div>
         <div id="holes"></div>
       </section>
 
       <section id="start-screen" class="start-screen">
-        <h1>Moles Vengance</h1>
+        <h1>Moles' Vengance</h1>
         <p>Our time has finally come!</p>
         <button id="begin-button">Let's begin</button>
         <div class="instructions">
@@ -47,7 +49,7 @@
       <section id="game-stats" class="game-stats">
         <div id="stats">
           <h2>Stats</h2>
-          <p>Lives: <span id="lives">0</span></p>
+          <p>Lives: <div id="heart-icons"></div></p>
           <p>Score: <span id="score">0</span></p>
           <p>Time left: <span id="time-left">00:00</span></p>
         </div>

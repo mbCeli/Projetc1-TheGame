@@ -26,7 +26,6 @@ class Mole {
     this.left = Math.floor(Math.random() * (950 - 100));
     // timer for the movement of the moles
     this.movementTimer = null;
-    this.collisionDetected = false;
     this.move();
   }
 
@@ -48,17 +47,17 @@ class Mole {
 
       // Adjust movement based on random direction
       if (randomDirection === 0) {
-        this.directionX = 50; // move right
+        this.directionX = 30; // move right
         this.directionY = 0;
       } else if (randomDirection === 1) {
-        this.directionX = -50; // move left
+        this.directionX = -30; // move left
         this.directionY = 0;
       } else if (randomDirection === 2) {
         this.directionX = 0;
-        this.directionY = 50; // move down
+        this.directionY = 30; // move down
       } else {
         this.directionX = 0;
-        this.directionY = -50; // move up
+        this.directionY = -30; // move up
       }
 
       // Update the mole's position based on the direction
@@ -81,58 +80,28 @@ class Mole {
 
       // Check for collision with the player
       this.checkMolePlayerCollision();
-    }, 800);
+    }, 1000);
   }
 
+
   checkMolePlayerCollision() {
-    if (this.collisionDetected) return;
-
+    // Get bounding rectangles of mole and player
     const moleRect = this.mole.getBoundingClientRect();
-    const moleLeft = moleRect.left;
-    const moleTop = moleRect.top;
-    const moleRight = moleLeft + moleRect.width;
-    const moleBottom = moleTop + moleRect.height;
-
     const playerRect = this.player.playerElement.getBoundingClientRect();
-    const playerLeft = playerRect.left;
-    const playerTop = playerRect.top;
-    const playerRight = playerLeft + playerRect.width;
-    const playerBottom = playerTop + playerRect.height;
 
+    // Check if there is a collision between the mole and player
     if (
-      moleLeft < playerRight &&
-      moleRight > playerLeft &&
-      moleTop < playerBottom &&
-      moleBottom > playerTop
+      moleRect.left < playerRect.right &&
+      moleRect.right > playerRect.left &&
+      moleRect.top < playerRect.bottom &&
+      moleRect.bottom > playerRect.top
     ) {
       console.log("Collision detected");
-
-      // Mark the collision as detected
-      this.collisionDetected = true;
-
-      // Subtract points from the game object
-      if (this.game.score >= 20) {
-        this.game.score -= 20;
-      } else {
-        this.game.score = 0;
-      }
-
-      this.game.updateScore();
-      console.log("Score updated");
-
-      // Prevent mole from going over player
-      if (this.directionX > 0) {
-        this.left -= 50;
-      } else if (this.directionX < 0) {
-        this.left += 50;
-      } else if (this.directionY > 0) {
-        this.top -= 50;
-      } else if (this.directionY < 0) {
-        this.top += 50;
-      }
-
-      this.updateMolePosition();
+      return true;
     }
+    
+    return false;
+
   }
 
   // Hide the mole

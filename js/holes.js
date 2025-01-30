@@ -1,4 +1,3 @@
-//PURE chatGPT
 class Hole {
   constructor(index) {
     this.holesContainer = document.getElementById("holes")
