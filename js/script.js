@@ -9,6 +9,7 @@ window.onload = function () {
   /*Declare a new game variable. I use let because everytime the startGame function 
     is called, the variable will be redefined*/
   let game;
+  let player;
 
   /*Add event listener to the begin button so when it is clicked, the startGame function 
     is called*/
@@ -22,7 +23,46 @@ window.onload = function () {
   function startGame() {
     console.log("Game Started");
     game = new Game();
+    player = new Player();
     game.start();
+
+    // Add the handleKeydown function as an event listener for the keydown event
+    window.addEventListener("keydown", handleKeydown);
+  }
+
+  /*Here the function that controls the pressing of the keys*/
+  function handleKeydown(event) {
+    event.preventDefault(); //pare evitar acciones por defecto del event
+
+    switch (event.key) {
+      case "ArrowUp":
+      case "w":
+        player.move("up");
+        break;
+
+      case "ArrowDown":
+      case "s":
+        player.move("down");
+        break;
+
+      case "ArrowLeft":
+      case "a":
+        player.move("left");
+        break;
+
+      case "ArrowRight":
+      case "d":
+        player.move("right");
+        break;
+
+      case " ":
+        if (player.isVisible) {
+          player.hide(); // Hide the player if visible
+        } else {
+          player.appear(); // The player appears if hidden
+        }
+        break;
+    }
   }
 
   /*The again button, restarts the game, starts a new game and hides the game over screen*/

@@ -10,8 +10,8 @@ class Game {
     for (let i = 0; i < 9; i++) {
       this.holes.push(new Hole(i)); // Pass the index to the Hole constructor
     }
-    this.player;
-    this.moles = [new Mole(), new Mole(), new Mole(), new Mole()];
+   /*  this.player = new Player; */
+    this.moles = [new Mole, new Mole, new Mole, new Mole];
     this.gameDuration = 30;
     this.remainingTime = this.gameDuration;
     this.timeRemainingContainer = document.getElementById("time-left");

@@ -5,8 +5,8 @@ class Hole {
     this.hole = document.createElement("img");
     this.hole.src = "./images/hole-pngtree.png";
     this.hole.style.position = "absolute";
-    this.hole.style.width = "100px";
-    this.hole.style.height = "100px";
+    this.hole.style.width = "130px";
+    this.hole.style.height = "130px";
     this.holesContainer.appendChild(this.hole);
 
     // Calculate the row and column based on index (0-8)
@@ -21,8 +21,8 @@ class Hole {
     const gapY = 200; // Vertical gap between holes (adjust if needed)
 
     // Set the position based on row and column index
-    const topPosition = this.row * gapY + 50; // Adding 50 to center the hole vertically
-    const leftPosition = this.col * gapX + 50; // Adding 50 to center the hole horizontally
+    const topPosition = this.row * gapY + 40; // Adding 50 to center the hole vertically
+    const leftPosition = this.col * gapX + 100; // Adding 100 to center the hole horizontally
 
     console.log(`Hole position: top = ${topPosition}, left = ${leftPosition}`); // Debug log to check position
 
