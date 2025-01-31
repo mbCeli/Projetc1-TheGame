@@ -40,8 +40,7 @@ class Mole {
   }
 
   move() {
-    // Create an interval for the moles to move
-    this.movementTimer = setInterval(() => {
+  
       // Randomly decide the direction of movement (left, right, up, down)
       const randomDirection = Math.floor(Math.random() * 4);
 
@@ -75,10 +74,6 @@ class Mole {
       this.top = newTop;
 
       this.updateMolePosition(); // Update mole position on the screen
-
-      // Check for collision with the player
-      this.checkMolePlayerCollision();
-    }, 1000);
   }
 
 
@@ -94,6 +89,7 @@ class Mole {
       moleRect.top < playerRect.bottom &&
       moleRect.bottom > playerRect.top
     ) {
+      console.log("Collision detected!");
       return true;
     }
     

@@ -23,18 +23,20 @@ class Game {
       new Mole(this.holes, this.player, this),
       new Mole(this.holes, this.player, this),
     ];
-    this.gameDuration = 30;
+    this.gameDuration = 60;
     this.remainingTime = this.gameDuration;
     this.timeRemainingContainer = document.getElementById("time-left");
     this.timer = null;
     this.gameOver = false;
-    this.lives = 3;
+    this.heartIcons = document.getElementById("heart-icons");
+    this.lives = 5;
     this.score = 0;
     this.scoreDisplay = document.getElementById("score");
     this.livesDisplay = document.getElementById("lives");
     this.playerVisibleTimer = null;
     this.finalScore = document.getElementById("final-score");
     this.finalMessage = document.createElement("p");
+    this.gameLoopTimer;
     this.gameOverStats.appendChild(this.finalMessage);
   }
 
@@ -53,7 +55,7 @@ class Game {
     this.startCountdown();
 
     //Start the game loop
-    this.gameLoop();
+    this.gameLoopTimer = setInterval(() => this.gameLoop(), 1000);
   }
 
   startCountdown() {
@@ -84,12 +86,14 @@ class Game {
 
     //Move the moles
     this.moles.forEach((mole) => mole.move());
+
     this.moles.forEach((mole) => {
       if (mole.checkMolePlayerCollision()) {
         this.lives -= 1;
         this.score -= 20;
-        this.livesDisplay.innerText = this.lives;
+        this.heartIcons.innerText = this.lives;
         this.scoreDisplay.innerText = this.score;
+        console.log("live display");
       }
 
       if (this.lives === 0) {
