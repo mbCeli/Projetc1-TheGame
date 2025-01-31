@@ -12,7 +12,7 @@ class Player {
 
     this.currentHoleIndex = 0; // Start at first hole
     this.isVisible = true; // At the beginning of the game the player is visible
-    this.previousHighlightedHole = null; // Store the previously highlighted hole
+    this.previousHighlightedHole = true; // Store the previously highlighted hole
     this.updatePlayerPosition(); // This is to update the player's position on the board
   }
 

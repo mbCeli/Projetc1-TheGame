@@ -98,6 +98,7 @@ class Game {
 
       if (this.lives === 0) {
         this.endGame();
+        clearInterval(this.gameLoopTimer);
       }
     });
 
@@ -125,12 +126,17 @@ class Game {
   updateScore() {
     // Increment points by 10 every second if the player is visible
     if (this.playerVisibleTimer === null) {
-      this.playerVisibleTimer = setInterval(() => {
-        if (this.player.isVisible) {
-          this.score += 10;
-          this.scoreDisplay.innerText = this.score;
-        }
-      }, 900); // Add 10 points every second
+      /* this.playerVisibleTimer = setInterval(() => { */
+      if (this.player.isVisible) {
+        this.score += 10;
+        this.scoreDisplay.innerText = this.score;
+      }
+
+      if (this.score <= 0) {
+        this.score = 0;
+        this.scoreDisplay.innerText = 0;
+      }
+      /*       }, 1000); // Add 10 points every second */
     }
     this.updateHeartIcons(); // Update heart icons when the player loses lives
   }
@@ -159,14 +165,19 @@ class Game {
     this.finalScore.innerText = this.score;
 
     // Show a message based on the final score below the score
-    if (this.score <= 200) {
+    if (this.score <= 0) {
+      this.finalScore.innerText = 0;
+      this.finalMessage.innerText = "Our revenge has been fulfilled!";
+      this.finalMessage.style.color = "firebrick";
+    } else if (this.score <= 200) {
       this.finalMessage.innerText = "Our revenge has been fulfilled!";
       this.finalMessage.style.color = "firebrick";
     } else if (this.score <= 400) {
       this.finalMessage.innerText = "You are good but not good for us";
       this.finalMessage.style.color = "firebrick";
     } else if (this.score <= 600) {
-      this.finalMessage.innerText = "You are the master of the mallet... and the mole's holes";
+      this.finalMessage.innerText =
+        "You are the master of the mallet... and the mole's holes";
       this.finalMessage.style.color = "firebrick";
     } else {
       this.finalMessage.innerText = "Your score is exceptionally high!";
