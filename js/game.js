@@ -5,6 +5,7 @@ class Game {
     this.gameOverScreen = document.getElementById("game-over-screen");
     this.gameOverStats = document.getElementById("game-over-stats");
     this.gameStats = document.getElementById("game-stats");
+    this.endMessage = document.getElementById("end-message");
     // Create holes with index (0 to 8)
     this.holes = [];
     for (let i = 0; i < 9; i++) {
@@ -126,7 +127,6 @@ class Game {
   updateScore() {
     // Increment points by 10 every second if the player is visible
     if (this.playerVisibleTimer === null) {
-      /* this.playerVisibleTimer = setInterval(() => { */
       if (this.player.isVisible) {
         this.score += 10;
         this.scoreDisplay.innerText = this.score;
@@ -136,7 +136,6 @@ class Game {
         this.score = 0;
         this.scoreDisplay.innerText = 0;
       }
-      /*       }, 1000); // Add 10 points every second */
     }
     this.updateHeartIcons(); // Update heart icons when the player loses lives
   }
@@ -168,20 +167,25 @@ class Game {
     if (this.score <= 0) {
       this.finalScore.innerText = 0;
       this.finalMessage.innerText = "Our revenge has been fulfilled!";
-      this.finalMessage.style.color = "firebrick";
+      this.finalMessage.style.color = "red";
+
     } else if (this.score <= 200) {
       this.finalMessage.innerText = "Our revenge has been fulfilled!";
-      this.finalMessage.style.color = "firebrick";
+      this.finalMessage.style.color = "red";
+
     } else if (this.score <= 400) {
       this.finalMessage.innerText = "You are good but not good for us";
       this.finalMessage.style.color = "firebrick";
+      this.endMessage.innerText = "Not bad";
+      
     } else if (this.score <= 600) {
       this.finalMessage.innerText =
         "You are the master of the mallet... and the mole's holes";
-      this.finalMessage.style.color = "firebrick";
+      this.finalMessage.style.color = "rgb(7, 77, 32)";
+      this.endMessage.innerText = "Ok, you win!";
     } else {
       this.finalMessage.innerText = "Your score is exceptionally high!";
-      this.finalMessage.style.color = "firebrick";
+      this.finalMessage.style.color = "rgb(7, 77, 32)";
     }
   }
 }

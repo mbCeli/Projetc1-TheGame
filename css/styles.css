@@ -127,6 +127,7 @@ main {
 
 .game-stats p {
   font-weight: bold;
+  color: rgba(221, 221, 16, 0.634);
 }
 
 /* GAME HOLES */
