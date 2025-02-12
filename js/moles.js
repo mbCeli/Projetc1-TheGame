@@ -89,7 +89,6 @@ class Mole {
       moleRect.top < playerRect.bottom &&
       moleRect.bottom > playerRect.top
     ) {
-      console.log("Collision detected!");
       return true;
     }
     
