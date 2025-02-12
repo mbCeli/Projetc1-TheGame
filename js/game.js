@@ -94,7 +94,6 @@ class Game {
         this.score -= 20;
         this.heartIcons.innerText = this.lives;
         this.scoreDisplay.innerText = this.score;
-        console.log("live display");
       }
 
       if (this.lives === 0) {
